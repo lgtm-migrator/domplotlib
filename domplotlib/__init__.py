@@ -25,6 +25,54 @@ Dom's extensions to matplotlib.
 #  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
+#  "save_svg" based on matplotlib
+#  |  1. This LICENSE AGREEMENT is between the Matplotlib Development Team
+#  |  ("MDT"), and the Individual or Organization ("Licensee") accessing and
+#  |  otherwise using matplotlib software in source or binary form and its
+#  |  associated documentation.
+#  |
+#  |  2. Subject to the terms and conditions of this License Agreement, MDT
+#  |  hereby grants Licensee a nonexclusive, royalty-free, world-wide license
+#  |  to reproduce, analyze, test, perform and/or display publicly, prepare
+#  |  derivative works, distribute, and otherwise use matplotlib
+#  |  alone or in any derivative version, provided, however, that MDT's
+#  |  License Agreement and MDT's notice of copyright, i.e., "Copyright (c)
+#  |  2012- Matplotlib Development Team; All Rights Reserved" are retained in
+#  |  matplotlib  alone or in any derivative version prepared by
+#  |  Licensee.
+#  |
+#  |  3. In the event Licensee prepares a derivative work that is based on or
+#  |  incorporates matplotlib or any part thereof, and wants to
+#  |  make the derivative work available to others as provided herein, then
+#  |  Licensee hereby agrees to include in any such work a brief summary of
+#  |  the changes made to matplotlib .
+#  |
+#  |  4. MDT is making matplotlib available to Licensee on an "AS
+#  |  IS" basis.  MDT MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR
+#  |  IMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, MDT MAKES NO AND
+#  |  DISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS
+#  |  FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF MATPLOTLIB
+#  |  WILL NOT INFRINGE ANY THIRD PARTY RIGHTS.
+#  |
+#  |  5. MDT SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF MATPLOTLIB
+#  |   FOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR
+#  |  LOSS AS A RESULT OF MODIFYING, DISTRIBUTING, OR OTHERWISE USING
+#  |  MATPLOTLIB , OR ANY DERIVATIVE THEREOF, EVEN IF ADVISED OF
+#  |  THE POSSIBILITY THEREOF.
+#  |
+#  |  6. This License Agreement will automatically terminate upon a material
+#  |  breach of its terms and conditions.
+#  |
+#  |  7. Nothing in this License Agreement shall be deemed to create any
+#  |  relationship of agency, partnership, or joint venture between MDT and
+#  |  Licensee.  This License Agreement does not grant permission to use MDT
+#  |  trademarks or trade name in a trademark sense to endorse or promote
+#  |  products or services of Licensee, or any third party.
+#  |
+#  |  8. By copying, installing or otherwise using matplotlib ,
+#  |  Licensee agrees to be bound by the terms and conditions of this License
+#  |  Agreement.
+#
 
 # stdlib
 import itertools
@@ -54,6 +102,7 @@ _T = TypeVar("_T")
 
 
 def save_svg(
+		figure: Figure,
 		fname: Union[PathLike, IO],
 		*,
 		dpi: Union[float, Literal["figure"]] = None,
@@ -68,6 +117,7 @@ def save_svg(
 	r"""
 	Save the given figure as an SVG.
 
+	:param figure:
 	:param fname: The file to save the SVG as.
 		If ``format`` is set, it determines the output format, and the file is saved as ``fname``.
 		Note that ``fname`` is used verbatim, and there is no attempt to make the extension,
@@ -81,9 +131,9 @@ def save_svg(
 	:param orientation: Currently only supported by the postscript backend.
 
 	:param transparent: If :py:obj:`True`, the axes patches will all be transparent;
-			the figure patch will also be transparent unless ``facecolor`` and/or ``edgecolor`` are specified.
-			This is useful, for example, for displaying a plot on top of a colored background on a web page.
-			The transparency of these patches will be restored to their original values upon exit of this function.
+		the figure patch will also be transparent unless ``facecolor`` and/or ``edgecolor`` are specified.
+		This is useful, for example, for displaying a plot on top of a colored background on a web page.
+		The transparency of these patches will be restored to their original values upon exit of this function.
 
 	:param bbox_inches: Bounding box in inches: only the given portion of the figure is saved.
 		If 'tight', try to figure out the tight bbox of the figure.
@@ -91,19 +141,11 @@ def save_svg(
 	:param pad_inches: Amount of padding around the figure when bbox_inches is 'tight'.
 
 	:param \*\*kwargs: Additional keyword arguments passed to :meth:`~.Figure.savefig`.
-
-	:return:
 	"""
 
-	# 3rd party
-	from matplotlib.pyplot import gcf  # type: ignore
-
-	# Import here to avoid clobbering theme and backend choices.
-
-	fig: Figure = gcf()
 	buf = StringIO()
 
-	fig.savefig(
+	figure.savefig(
 			fname=buf,
 			format="svg",
 			dpi=dpi,
@@ -115,7 +157,9 @@ def save_svg(
 			pad_inches=pad_inches,
 			**kwargs,
 			)
-	fig.canvas.draw_idle()  # need this if 'transparent=True' to reset colors
+
+	# need this if 'transparent=True' to reset colors
+	figure.canvas.draw_idle()
 
 	if isinstance(fname, IO):
 		clean_writer(buf.getvalue(), fname)

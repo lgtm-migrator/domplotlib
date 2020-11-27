@@ -1,0 +1,5 @@
+==================
+:mod:`domplotlib`
+==================
+
+.. automodule:: domplotlib

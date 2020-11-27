@@ -15,6 +15,8 @@ domplotlib
 	:stub-columns: 1
 	:widths: 10 90
 
+	* - Docs
+	  - |docs| |docs_check|
 	* - Tests
 	  - |travis| |actions_windows| |actions_macos| |codefactor| |pre_commit_ci|
 	* - PyPI
@@ -24,7 +26,13 @@ domplotlib
 	* - Other
 	  - |license| |language| |requires| |pre_commit|
 
+.. |docs| image:: https://img.shields.io/readthedocs/domplotlib/latest?logo=read-the-docs
+	:target: https://domplotlib.readthedocs.io/en/latest/?badge=latest
+	:alt: Documentation Build Status
 
+.. |docs_check| image:: https://github.com/domdfcoding/domplotlib/workflows/Docs%20Check/badge.svg
+	:target: https://github.com/domdfcoding/domplotlib/actions?query=workflow%3A%22Docs+Check%22
+	:alt: Docs Check Status
 
 .. |travis| image:: https://github.com/domdfcoding/domplotlib/workflows/Linux%20Tests/badge.svg
 	:target: https://github.com/domdfcoding/domplotlib/actions?query=workflow%3A%22Linux+Tests%22
