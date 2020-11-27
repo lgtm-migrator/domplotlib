@@ -2,7 +2,7 @@
 #
 #  styles/domdf.py
 """
-Adapted from Solarize_Light2
+Adapted from Solarize_Light2.
 """
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -12,7 +12,6 @@ Adapted from Solarize_Light2
 #  in the Software without restriction, including without limitation the rights
 #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 #  copies of the Software, and to permit persons to whom the Software is
-
 #  furnished to do so, subject to the following conditions:
 #
 #  The above copyright notice and this permission notice shall be included in all

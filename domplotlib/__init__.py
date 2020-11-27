@@ -2,7 +2,7 @@
 #
 #  __init__.py
 """
-Dom's extensions to matplotlib
+Dom's extensions to matplotlib.
 """
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -12,7 +12,6 @@ Dom's extensions to matplotlib
 #  in the Software without restriction, including without limitation the rights
 #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 #  copies of the Software, and to permit persons to whom the Software is
-
 #  furnished to do so, subject to the following conditions:
 #
 #  The above copyright notice and this permission notice shall be included in all
@@ -37,10 +36,10 @@ from domdf_python_tools.iterative import chunks
 from domdf_python_tools.pagesizes import PageSize
 from domdf_python_tools.paths import clean_writer
 from domdf_python_tools.typing import PathLike
-from matplotlib.artist import Artist
-from matplotlib.axes import Axes
-from matplotlib.figure import Figure
-from matplotlib.legend import Legend
+from matplotlib.artist import Artist  # type: ignore
+from matplotlib.axes import Axes  # type: ignore
+from matplotlib.figure import Figure  # type: ignore
+from matplotlib.legend import Legend  # type: ignore
 from typing_extensions import Literal
 
 __all__ = ["create_figure", "horizontal_legend", "save_svg", "transpose"]
@@ -86,12 +85,10 @@ def save_svg(
 			This is useful, for example, for displaying a plot on top of a colored background on a web page.
 			The transparency of these patches will be restored to their original values upon exit of this function.
 
-	:param bbox_inches: str or `.Bbox`, default: :rc:`savefig.bbox`
-			Bounding box in inches: only the given portion of the figure is
-			saved.  If 'tight', try to figure out the tight bbox of the figure.
+	:param bbox_inches: Bounding box in inches: only the given portion of the figure is saved.
+		If 'tight', try to figure out the tight bbox of the figure.
 
-	:param pad_inches: float, default: :rc:`savefig.pad_inches`
-			Amount of padding around the figure when bbox_inches is 'tight'.
+	:param pad_inches: Amount of padding around the figure when bbox_inches is 'tight'.
 
 	:param \*\*kwargs: Additional keyword arguments passed to :meth:`~.Figure.savefig`.
 
@@ -99,7 +96,7 @@ def save_svg(
 	"""
 
 	# 3rd party
-	from matplotlib.pyplot import gcf
+	from matplotlib.pyplot import gcf  # type: ignore
 
 	# Import here to avoid clobbering theme and backend choices.
 
@@ -120,8 +117,11 @@ def save_svg(
 			)
 	fig.canvas.draw_idle()  # need this if 'transparent=True' to reset colors
 
-	with open(fname, 'w') as fp:
-		clean_writer(buf.getvalue(), fp)
+	if isinstance(fname, IO):
+		clean_writer(buf.getvalue(), fname)
+	else:
+		with open(fname, 'w') as fp:
+			clean_writer(buf.getvalue(), fp)
 
 
 def transpose(iterable: Iterable[_T], ncol: int) -> Iterable[_T]:
@@ -159,8 +159,10 @@ def horizontal_legend(
 		handles, labels = fig.axes[0].get_legend_handles_labels()
 
 	# Rearrange legend items to read right to left rather than top to bottom.
-	handles = list(filter(None, itertools.chain.from_iterable(itertools.zip_longest(*chunks(handles, ncol)))))
-	labels = list(filter(None, itertools.chain.from_iterable(itertools.zip_longest(*chunks(labels, ncol)))))
+	if handles:
+		handles = list(filter(None, transpose(handles, ncol)))
+	if labels:
+		labels = list(filter(None, transpose(labels, ncol)))
 
 	return fig.legend(handles, labels, ncol=ncol, **kwargs)
 
@@ -184,7 +186,7 @@ def create_figure(
 	"""  # noqa: D400
 
 	# 3rd party
-	from matplotlib import pyplot
+	from matplotlib import pyplot  # type: ignore
 
 	# Import here to avoid clobbering theme and backend choices.
 
