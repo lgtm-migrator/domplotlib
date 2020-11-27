@@ -82,7 +82,7 @@ from typing import IO, Iterable, Optional, Tuple, TypeVar, Union
 # 3rd party
 from domdf_python_tools.iterative import chunks
 from domdf_python_tools.pagesizes import PageSize
-from domdf_python_tools.paths import clean_writer
+from domdf_python_tools.paths import PathPlus, clean_writer
 from domdf_python_tools.typing import PathLike
 from matplotlib.artist import Artist  # type: ignore
 from matplotlib.axes import Axes  # type: ignore
@@ -164,8 +164,7 @@ def save_svg(
 	if isinstance(fname, IO):
 		clean_writer(buf.getvalue(), fname)
 	else:
-		with open(fname, 'w') as fp:
-			clean_writer(buf.getvalue(), fp)
+		PathPlus(fname).write_clean(buf.getvalue())
 
 
 def transpose(iterable: Iterable[_T], ncol: int) -> Iterable[_T]:

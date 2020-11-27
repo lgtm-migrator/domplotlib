@@ -29,6 +29,7 @@ import matplotlib  # type: ignore
 current_backend = matplotlib.rcParams["backend"]
 
 try:
+	# stdlib
 	import tkinter
 	matplotlib.use("TkAgg")
 except ImportError:
