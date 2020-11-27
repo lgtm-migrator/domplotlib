@@ -1,0 +1,6 @@
+{
+  "tests.test_domplotlib.test_horizontal_legend[h_bar_chart]": "d567e8951c38e822966ea104e4feb988bcac746b30dc9d85c16aa6ed66253383",
+  "tests.test_domplotlib.test_horizontal_legend[koch_snowflake]": "e349c9abe40b9aac32ef343acb5648c719ee5a8a8a944a5b82db5c1bd93beeba",
+  "tests.test_domplotlib.test_horizontal_legend[hatch_filled_histograms]": "6fedd1f63c2f4ee86baa353b2385e95f5467908d30003834cedc44f849ed9304",
+  "tests.test_domplotlib.test_horizontal_legend_markevery": "19173ed4c119c081ec89f73805a872308ee6cd38011acd4664f6435a91706e03"
+}

@@ -13,6 +13,13 @@ from domplotlib import horizontal_legend, save_svg
 from tests.plots import h_bar_chart, hatch_filled_histograms, koch_snowflake, markevery
 
 baseline_dir = str(PathPlus(__file__).parent / "baseline")
+image_hashes = str(PathPlus(__file__).parent / "image_hashes.json")
+
+check_images = pytest.mark.mpl_image_compare(
+		baseline_dir=baseline_dir,
+		savefig_kwargs={"dpi": 1200},
+		hash_library=image_hashes,
+		)
 
 
 @pytest.mark.parametrize("plot", [
@@ -41,7 +48,7 @@ def test_save_svg(
 		hatch_filled_histograms,
 		h_bar_chart,
 		])
-@pytest.mark.mpl_image_compare(baseline_dir=baseline_dir, savefig_kwargs={"dpi": 1200})
+@check_images
 def test_horizontal_legend(
 		tmp_pathplus,
 		file_regression: FileRegressionFixture,
@@ -54,7 +61,7 @@ def test_horizontal_legend(
 	return fig
 
 
-@pytest.mark.mpl_image_compare(baseline_dir=baseline_dir, savefig_kwargs={"dpi": 1200})
+@check_images
 def test_horizontal_legend_markevery(tmp_pathplus, file_regression: FileRegressionFixture):
 	fig, axs = markevery()
 
