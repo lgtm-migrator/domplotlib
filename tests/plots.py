@@ -5,12 +5,10 @@ from functools import partial
 from typing import List, Tuple
 
 # 3rd party
-import matplotlib.pyplot as plt
-import numpy
-import numpy as np
-from cycler import cycler
-from matplotlib.axes import Axes
-from matplotlib.figure import Figure
+import numpy  # type: ignore
+from cycler import cycler  # type: ignore
+from matplotlib.axes import Axes  # type: ignore
+from matplotlib.figure import Figure  # type: ignore
 
 # this package
 from domplotlib.styles.default import plt
@@ -88,11 +86,11 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 		"""
 		print(orientation)
 		if orientation not in "hv":
-			raise ValueError("orientation must be in {{'h', 'v'}} " "not {o}".format(o=orientation))
+			raise ValueError(f"orientation must be in {{'h', 'v'}} not {orientation}")
 
 		kwargs.setdefault("step", "post")
-		edges = np.asarray(edges)
-		values = np.asarray(values)
+		edges = numpy.asarray(edges)
+		values = numpy.asarray(values)
 		if len(edges) - 1 != len(values):
 			raise ValueError(
 					'Must provide one more bin edge than value not: '
@@ -101,10 +99,10 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 
 		if bottoms is None:
 			bottoms = 0
-		bottoms = np.broadcast_to(bottoms, values.shape)
+		bottoms = numpy.broadcast_to(bottoms, values.shape)
 
-		values = np.append(values, values[-1])
-		bottoms = np.append(bottoms, bottoms[-1])
+		values = numpy.append(values, values[-1])
+		bottoms = numpy.append(bottoms, bottoms[-1])
 		if orientation == 'h':
 			return ax.fill_betweenx(edges, values, bottoms, **kwargs)
 		elif orientation == 'v':
@@ -171,7 +169,7 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 		"""
 		# deal with default binning function
 		if hist_func is None:
-			hist_func = np.histogram
+			hist_func = numpy.histogram
 
 		# deal with default plotting function
 		if plot_func is None:
@@ -204,7 +202,7 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 			label = sty.pop("label", label)
 			vals, edges = hist_func(data)
 			if bottoms is None:
-				bottoms = np.zeros_like(vals)
+				bottoms = numpy.zeros_like(vals)
 			top = bottoms + vals
 			print(sty)
 			sty.update(plot_kwargs)
@@ -216,8 +214,8 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 		return arts
 
 	# set up histogram function to fixed bins
-	edges = np.linspace(-3, 3, 20, endpoint=True)
-	hist_func = partial(np.histogram, bins=edges)
+	edges = numpy.linspace(-3, 3, 20, endpoint=True)
+	hist_func = partial(numpy.histogram, bins=edges)
 
 	# set up style cycles
 	color_cycle = cycler(facecolor=plt.rcParams["axes.prop_cycle"][:4])
@@ -225,9 +223,9 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 	hatch_cycle = cycler(hatch=['/', '*', '+', '|'])
 
 	# Fixing random state for reproducibility
-	np.random.seed(19680801)
+	numpy.random.seed(19680801)
 
-	stack_data = np.random.randn(4, 12250)
+	stack_data = numpy.random.randn(4, 12250)
 	dict_data = OrderedDict(zip((c["label"] for c in label_cycle), stack_data))
 
 	fig, ax = plt.subplots(1, 1, figsize=(9, 4.5), tight_layout=True)
@@ -266,14 +264,14 @@ def h_bar_chart() -> Tuple[Figure, Axes]:
 			The category labels.
 		"""
 		labels = list(results.keys())
-		data = np.array(list(results.values()))
+		data = numpy.array(list(results.values()))
 		data_cum = data.cumsum(axis=1)
-		category_colors = plt.get_cmap("RdYlGn")(np.linspace(0.15, 0.85, data.shape[1]))
+		category_colors = plt.get_cmap("RdYlGn")(numpy.linspace(0.15, 0.85, data.shape[1]))
 
 		fig, ax = plt.subplots(figsize=(9.2, 5))
 		ax.invert_yaxis()
 		ax.xaxis.set_visible(False)
-		ax.set_xlim(0, np.sum(data, axis=1).max())
+		ax.set_xlim(0, numpy.sum(data, axis=1).max())
 
 		for i, (colname, color) in enumerate(zip(category_names, category_colors)):
 			widths = data[:, i]
@@ -306,8 +304,8 @@ def markevery() -> Tuple[Figure, List[Axes]]:
 	rows = len(cases) // cols + 1
 	# define the data for cartesian plots
 	delta = 0.11
-	x = np.linspace(0, 10 - 2 * delta, 200) + delta
-	y = np.sin(x) + 1.0 + delta
+	x = numpy.linspace(0, 10 - 2 * delta, 200) + delta
+	y = numpy.sin(x) + 1.0 + delta
 
 	def trim_axs(axs, N):
 		"""
@@ -322,7 +320,7 @@ def markevery() -> Tuple[Figure, List[Axes]]:
 	axs = fig.subplots(rows, cols)
 	axs = trim_axs(axs, len(cases))
 
-	colour_cycle = itertools.cycle(plt.rcParams['axes.prop_cycle'].by_key()['color'])
+	colour_cycle = itertools.cycle(plt.rcParams["axes.prop_cycle"].by_key()["color"])
 
 	for ax, case in zip(axs, cases):
 		ax.set_title(f"markevery={case}")

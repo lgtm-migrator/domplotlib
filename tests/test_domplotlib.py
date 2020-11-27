@@ -1,11 +1,11 @@
 # stdlib
-from typing import Callable, List, Tuple
+from typing import Callable, Tuple
 
 # 3rd party
 import pytest
 from domdf_python_tools.paths import PathPlus
-from matplotlib.axes import Axes
-from matplotlib.figure import Figure
+from matplotlib.axes import Axes  # type: ignore
+from matplotlib.figure import Figure  # type: ignore
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
@@ -21,7 +21,11 @@ baseline_dir = str(PathPlus(__file__).parent / "baseline")
 		h_bar_chart,
 		markevery,
 		])
-def test_save_svg(tmp_pathplus, file_regression: FileRegressionFixture, plot: Callable[[], Tuple[Figure, ...]],):
+def test_save_svg(
+		tmp_pathplus,
+		file_regression: FileRegressionFixture,
+		plot: Callable[[], Tuple[Figure, ...]],
+		):
 	fig, *_ = plot()
 
 	filename = tmp_pathplus / "plot.svg"
@@ -38,7 +42,11 @@ def test_save_svg(tmp_pathplus, file_regression: FileRegressionFixture, plot: Ca
 		h_bar_chart,
 		])
 @pytest.mark.mpl_image_compare(baseline_dir=baseline_dir, savefig_kwargs={"dpi": 1200})
-def test_horizontal_legend(tmp_pathplus, file_regression: FileRegressionFixture, plot: Callable[[], Tuple[Figure, Axes]],):
+def test_horizontal_legend(
+		tmp_pathplus,
+		file_regression: FileRegressionFixture,
+		plot: Callable[[], Tuple[Figure, Axes]],
+		):
 	fig, ax = plot()
 
 	horizontal_legend(fig)
