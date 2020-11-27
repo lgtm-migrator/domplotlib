@@ -26,7 +26,10 @@
 # 3rd party
 import matplotlib  # type: ignore
 
-matplotlib.use("TkAgg")
+try:
+	matplotlib.use("TkAgg")
+except ImportError:
+	pass
 
 # 3rd party
 import matplotlib.pyplot  # type: ignore  # noqa: E402
