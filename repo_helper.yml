@@ -1,0 +1,28 @@
+# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper)
+---
+modname: 'domplotlib'
+copyright_years: '2020'
+author: 'Dominic Davis-Foster'
+email: 'dominic@davis-foster.co.uk'
+username: 'domdfcoding'
+version: '0.0.0'
+license: 'MIT'
+short_desc: 'Dom''s extensions to matplotlib'
+
+enable_conda: false
+enable_docs: false
+enable_tests: false
+
+python_versions:
+  - 3.6
+  - 3.7
+  - 3.8
+  - 3.9
+
+keywords:
+  - matplotlib
+  - plotting
+  - visualisation
+
+manifest_additional:
+  - include domplotlib/styles/domdf.mplstyle
