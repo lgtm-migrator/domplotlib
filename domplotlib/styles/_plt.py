@@ -26,13 +26,19 @@
 # 3rd party
 import matplotlib  # type: ignore
 
+current_backend = matplotlib.rcParams["backend"]
+
 try:
+	import tkinter
 	matplotlib.use("TkAgg")
 except ImportError:
 	pass
 
-# 3rd party
-import matplotlib.pyplot  # type: ignore  # noqa: E402
+try:
+	# 3rd party
+	import matplotlib.pyplot  # type: ignore  # noqa: E402
+except ImportError:
+	matplotlib.rcParams["backend"] = current_backend
 
 plt = matplotlib.pyplot
 
