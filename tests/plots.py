@@ -120,53 +120,7 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 			plot_func=None,
 			plot_kwargs=None
 			):
-		"""
-		Parameters
-		----------
-		ax : axes.Axes
-			The axes to add artists too
 
-		stacked_data : array or Mapping
-			A (N, M) shaped array.  The first dimension will be iterated over to
-			compute histograms row-wise
-
-		sty_cycle : Cycler or operable of dict
-			Style to apply to each set
-
-		bottoms : array, default: 0
-			The initial positions of the bottoms.
-
-		hist_func : callable, optional
-			Must have signature `bin_vals, bin_edges = f(data)`.
-			`bin_edges` expected to be one longer than `bin_vals`
-
-		labels : list of str, optional
-			The label for each set.
-
-			If not given and stacked data is an array defaults to 'default set {n}'
-
-			If stacked_data is a mapping, and labels is None, default to the keys
-			(which may come out in a random order).
-
-			If stacked_data is a mapping and labels is given then only
-			the columns listed by be plotted.
-
-		plot_func : callable, optional
-			Function to call to draw the histogram must have signature:
-
-			  ret = plot_func(ax, edges, top, bottoms=bottoms,
-							  label=label, **kwargs)
-
-		plot_kwargs : dict, optional
-			Any extra kwargs to pass through to the plotting function.  This
-			will be the same for all calls to the plotting function and will
-			over-ride the values in cycle.
-
-		Returns
-		-------
-		arts : dict
-			Dictionary of artists keyed on their labels
-		"""
 		# deal with default binning function
 		if hist_func is None:
 			hist_func = numpy.histogram
