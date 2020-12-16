@@ -16,6 +16,7 @@ python_versions:
   - 3.7
   - 3.8
   - 3.9
+  - 3.10-dev
 
 keywords:
   - matplotlib
@@ -28,3 +29,6 @@ manifest_additional:
 sphinx_html_theme: furo
 tox_unmanaged:
   - pytest
+
+tox_requirements:
+  - "tox-pip-version>=0.0.7"
