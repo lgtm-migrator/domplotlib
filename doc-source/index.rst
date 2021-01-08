@@ -134,6 +134,7 @@ Installation
 	:caption: API Reference
 	:glob:
 
+	api/domplotlib
 	api/*
 
 .. toctree::
