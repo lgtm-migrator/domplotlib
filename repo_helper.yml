@@ -32,3 +32,9 @@ tox_unmanaged:
 
 tox_requirements:
   - "tox-pip-version>=0.0.7"
+
+classifiers:
+ - 'Development Status :: 4 - Beta'
+ - 'Framework :: Matplotlib'
+ - 'Intended Audience :: Developers'
+ - 'Topic :: Software Development :: Libraries :: Python Modules'
