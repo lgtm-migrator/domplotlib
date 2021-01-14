@@ -10,6 +10,7 @@ license: 'MIT'
 short_desc: 'Dom''s extensions to matplotlib'
 
 enable_conda: false
+sphinx_html_theme: furo
 
 python_versions:
   - 3.6
@@ -26,7 +27,6 @@ keywords:
 manifest_additional:
   - include domplotlib/styles/domdf.mplstyle
 
-sphinx_html_theme: furo
 tox_unmanaged:
   - pytest
 
