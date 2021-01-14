@@ -30,7 +30,7 @@ current_backend = matplotlib.rcParams["backend"]
 
 try:
 	# stdlib
-	import tkinter
+	import tkinter  # noqa: F401  # lgtm [py/unused-import]
 	matplotlib.use("TkAgg")
 except ImportError:
 	pass
