@@ -6,5 +6,5 @@ Each of these styles expose ``plt``, which is an alias of :mod:`matplotlib.pyplo
 
 The styles currently available are:
 
-* ``default`` -- The default matplotlib style.
+* ``default`` -- The default matplotlib style. Forces the backend to be ``TkAgg`` if ``tkinter`` is available.
 * ``domdf`` -- A theme adapted from ``Solarize_Light2``.
