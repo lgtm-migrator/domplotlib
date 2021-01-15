@@ -38,3 +38,6 @@ classifiers:
  - 'Framework :: Matplotlib'
  - 'Intended Audience :: Developers'
  - 'Topic :: Software Development :: Libraries :: Python Modules'
+
+imgbot_ignore:
+ - tests/baseline/*
