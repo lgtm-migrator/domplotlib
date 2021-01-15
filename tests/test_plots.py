@@ -1,3 +1,6 @@
+# stdlib
+from typing import Iterable, Tuple
+
 # 3rd party
 import pytest
 from cawdrey import Tally
@@ -46,7 +49,7 @@ def test_plot_pie_from_tally(tmp_pathplus, file_regression: FileRegressionFixtur
 	assert len(autotexts) == 5
 
 	if reverse:
-		most_common = reversed(tally.most_common())
+		most_common: Iterable[Tuple[str, int]] = reversed(tally.most_common())
 	else:
 		most_common = tally.most_common()
 
