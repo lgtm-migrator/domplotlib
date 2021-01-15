@@ -3,23 +3,13 @@ from typing import Callable, Tuple
 
 # 3rd party
 import pytest
-from domdf_python_tools.paths import PathPlus
 from matplotlib.axes import Axes  # type: ignore
 from matplotlib.figure import Figure  # type: ignore
-from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
 from domplotlib import horizontal_legend, save_svg
+from tests.common import check_images
 from tests.plots import h_bar_chart, hatch_filled_histograms, koch_snowflake, markevery
-
-baseline_dir = str(PathPlus(__file__).parent / "baseline")
-image_hashes = str(PathPlus(__file__).parent / "image_hashes.json")
-
-check_images = pytest.mark.mpl_image_compare(
-		baseline_dir=baseline_dir,
-		savefig_kwargs={"dpi": 1200},
-		hash_library=image_hashes,
-		)
 
 
 @pytest.mark.parametrize("plot", [
@@ -28,11 +18,7 @@ check_images = pytest.mark.mpl_image_compare(
 		h_bar_chart,
 		markevery,
 		])
-def test_save_svg(
-		tmp_pathplus,
-		file_regression: FileRegressionFixture,
-		plot: Callable[[], Tuple[Figure, ...]],
-		):
+def test_save_svg(tmp_pathplus, plot: Callable[[], Tuple[Figure, ...]]):
 	fig, *_ = plot()
 
 	filename = tmp_pathplus / "plot.svg"
@@ -49,11 +35,7 @@ def test_save_svg(
 		h_bar_chart,
 		])
 @check_images
-def test_horizontal_legend(
-		tmp_pathplus,
-		file_regression: FileRegressionFixture,
-		plot: Callable[[], Tuple[Figure, Axes]],
-		):
+def test_horizontal_legend(tmp_pathplus, plot: Callable[[], Tuple[Figure, Axes]]):
 	fig, ax = plot()
 
 	horizontal_legend(fig)
@@ -62,7 +44,7 @@ def test_horizontal_legend(
 
 
 @check_images
-def test_horizontal_legend_markevery(tmp_pathplus, file_regression: FileRegressionFixture):
+def test_horizontal_legend_markevery(tmp_pathplus):
 	fig, axs = markevery()
 
 	handles = []
