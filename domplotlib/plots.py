@@ -33,12 +33,10 @@ from typing import Collection, List, Optional, Tuple, overload
 
 # 3rd party
 from cawdrey.tally import SupportsMostCommon, Tally
+from matplotlib.patches import Wedge  # type: ignore
+from matplotlib.text import Text  # type: ignore
 
 __all__ = ["pie_from_tally"]
-
-# 3rd party
-from matplotlib.patches import Wedge
-from matplotlib.text import Text
 
 
 @overload

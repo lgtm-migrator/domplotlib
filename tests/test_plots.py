@@ -1,8 +1,8 @@
 # 3rd party
 import pytest
 from cawdrey import Tally
-from matplotlib.figure import Figure
-from matplotlib.text import Text
+from matplotlib.figure import Figure  # type: ignore
+from matplotlib.text import Text  # type: ignore
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
@@ -32,7 +32,7 @@ def test_plot_pie_from_tally(tmp_pathplus, file_regression: FileRegressionFixtur
 	fig: Figure = plt.figure(figsize=(8, 8))
 	ax = fig.subplots()
 
-	patches,  texts,  autotexts = pie_from_tally(
+	patches, texts, autotexts = pie_from_tally(
 		tally,
 		[tally.most_common(1)[0][0]],
 		autopct="%1.1f%%",
@@ -46,15 +46,14 @@ def test_plot_pie_from_tally(tmp_pathplus, file_regression: FileRegressionFixtur
 	assert len(autotexts) == 5
 
 	if reverse:
-		text: Text
-		for text, autotext, pet in zip(texts, autotexts, reversed(tally.most_common())):
-			assert text.get_text() == pet[0]
-			assert autotext.get_text() == f"{tally.get_percentage(pet[0]):0.1%}"
+		most_common = reversed(tally.most_common())
 	else:
-		text: Text
-		for text, autotext, pet in zip(texts, autotexts, tally.most_common()):
-			assert text.get_text() == pet[0]
-			assert autotext.get_text() == f"{tally.get_percentage(pet[0]):0.1%}"
+		most_common = tally.most_common()
+
+	text: Text
+	for text, autotext, pet in zip(texts, autotexts, most_common):
+		assert text.get_text() == pet[0]
+		assert autotext.get_text() == f"{tally.get_percentage(pet[0]):0.1%}"
 
 	ax.axis("equal", emit=True)
 
