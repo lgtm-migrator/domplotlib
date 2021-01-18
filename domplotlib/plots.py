@@ -4,7 +4,7 @@
 """
 Custom plotting functions.
 
-.. versionadded:: 0.1.0
+.. versionadded:: 0.2.0
 """
 #
 #  Copyright © 2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
