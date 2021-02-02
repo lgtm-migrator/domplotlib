@@ -1,4 +1,5 @@
 # stdlib
+import importlib
 from typing import Iterable, Tuple
 
 # 3rd party
@@ -10,13 +11,23 @@ from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
 from domplotlib.plots import pie_from_tally
-from domplotlib.styles._plt import plt
 from tests.common import check_images
 
 
 @pytest.mark.parametrize("reverse", [True, False])
+@pytest.mark.parametrize("style", ["default", "domdf"])
 @check_images
-def test_plot_pie_from_tally(tmp_pathplus, file_regression: FileRegressionFixture, reverse: bool):
+def test_plot_pie_from_tally(
+		tmp_pathplus,
+		file_regression: FileRegressionFixture,
+		reverse: bool,
+		style: str,
+		):
+
+	style_module = importlib.import_module(f"domplotlib.styles.{style}")
+	importlib.reload(style_module)
+	plt = style_module.plt  # type: ignore
+
 	data = [
 			"cat",
 			"dog",

@@ -48,8 +48,7 @@ def pie_from_tally(
 		reverse: bool = ...,
 		autopct: None = ...,
 		**kwargs,
-		) -> Tuple[List[Wedge], List[Text]]:
-	...  # pragma: no cover
+		) -> Tuple[List[Wedge], List[Text]]: ...
 
 
 @overload
@@ -61,8 +60,7 @@ def pie_from_tally(
 		reverse: bool = ...,
 		autopct: str,
 		**kwargs,
-		) -> Tuple[List[Wedge], List[Text], List[Text]]:
-	...  # pragma: no cover
+		) -> Tuple[List[Wedge], List[Text], List[Text]]: ...
 
 
 def pie_from_tally(

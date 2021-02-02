@@ -42,5 +42,6 @@ except ImportError:
 	matplotlib.rcParams["backend"] = current_backend
 
 plt = matplotlib.pyplot
+plt.style.use("default")
 
 __all__ = ["plt"]
