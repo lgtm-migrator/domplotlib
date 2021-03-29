@@ -7,6 +7,6 @@ image_hashes = str(PathPlus(__file__).parent / "image_hashes.json")
 
 check_images = pytest.mark.mpl_image_compare(
 		baseline_dir=baseline_dir,
-		savefig_kwargs={"dpi": 1200},
+		savefig_kwargs={"dpi": 600},
 		hash_library=image_hashes,
 		)
