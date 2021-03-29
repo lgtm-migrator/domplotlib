@@ -4,7 +4,7 @@ domplotlib
 
 .. start short_desc
 
-**Dom's extensions to matplotlib**
+.. documentation-summary::
 
 .. end short_desc
 
