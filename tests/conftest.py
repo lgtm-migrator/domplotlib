@@ -1,4 +1,4 @@
-pytest_plugins = ("domdf_python_tools.testing", )
+pytest_plugins = ("coincidence", )
 """
 To regenerate the baseline:
 
