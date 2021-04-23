@@ -26,7 +26,14 @@ Default style.
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# stdlib
+import importlib
+
 # this package
-from domplotlib.styles._plt import plt
+import domplotlib.styles._plt
+
+importlib.reload(domplotlib.styles._plt)
+
+plt = domplotlib.styles._plt.plt
 
 __all__ = ["plt"]

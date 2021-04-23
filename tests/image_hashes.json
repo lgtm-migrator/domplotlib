@@ -3,8 +3,8 @@
   "tests.test_domplotlib.test_horizontal_legend[koch_snowflake]": "b0daa9209485ec5e6cb14c9d76293865e832697a111a09eedd7c80fe8bd030d5",
   "tests.test_domplotlib.test_horizontal_legend[hatch_filled_histograms]": "b9788f1dc8e95020252da6f4752cae8d08c57274e8c00ff2583b1f40cc7fc904",
   "tests.test_domplotlib.test_horizontal_legend_markevery": "33bb96dc19a9798e1342647fab77c4a38bd38059387249171a086b4f33df07bb",
-  "tests.test_plots.test_plot_pie_from_tally[default-True]": "691fe808ddd69d7a9f5c9bd0aae744a4aeeaa082eba3bafa5163022711e9af94",
-  "tests.test_plots.test_plot_pie_from_tally[default-False]": "61083135facec1ccac3c7cafe517a2e54590fe3e2a7795d1c983e1a38243276d",
+  "tests.test_plots.test_plot_pie_from_tally[default-True]": "b1ae597f330e413ca488edddd3b7d6924b1966a3246120866de4787cf9154b28",
+  "tests.test_plots.test_plot_pie_from_tally[default-False]": "08f2d9bd5f87b4eeca7c59b5f33468ccb41d261d0c3f14852877227c14f95ebe",
   "tests.test_plots.test_plot_pie_from_tally[domdf-False]": "83cbed4b57e005e965512afd37a88ddc19a2d96d05d9800ea1880fbb3ac57660",
   "tests.test_plots.test_plot_pie_from_tally[domdf-True]": "5330f00b19b8af545f345b0ea222ad48f527a4e92375b7edb3896c3c36a7ae81"
 }
