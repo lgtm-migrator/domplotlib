@@ -28,17 +28,17 @@ import matplotlib  # type: ignore
 
 current_backend = matplotlib.rcParams["backend"]
 
-try:
+try:  # pragma: no cover
 	# stdlib
 	import tkinter  # noqa: F401  # lgtm [py/unused-import]
 	matplotlib.use("TkAgg")
-except ImportError:
+except ImportError:  # pragma: no cover
 	pass
 
 try:
 	# 3rd party
 	import matplotlib.pyplot  # type: ignore  # noqa: E402
-except ImportError:
+except ImportError:  # pragma: no cover
 	matplotlib.rcParams["backend"] = current_backend
 
 plt = matplotlib.pyplot

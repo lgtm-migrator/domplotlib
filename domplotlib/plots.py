@@ -91,7 +91,8 @@ def pie_from_tally(
 
 	if "ax" in kwargs:
 		ax = kwargs.pop("ax")
-	else:
+	else:  # pragma: no cover
+
 		# 3rd party
 		from matplotlib import pyplot  # type: ignore
 		ax = pyplot.gca()
