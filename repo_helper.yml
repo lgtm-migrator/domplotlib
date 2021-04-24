@@ -12,7 +12,7 @@ short_desc: 'Dom''s extensions to matplotlib'
 enable_conda: false
 use_whey: True
 sphinx_html_theme: furo
-min_coverage: 88
+min_coverage: 90
 
 python_versions:
   - 3.6
