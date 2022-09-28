@@ -24,7 +24,7 @@
 #
 
 # 3rd party
-import matplotlib  # type: ignore
+import matplotlib  # type: ignore[import]
 
 current_backend = matplotlib.rcParams["backend"]
 
@@ -37,7 +37,7 @@ except ImportError:  # pragma: no cover
 
 try:
 	# 3rd party
-	import matplotlib.pyplot  # type: ignore  # noqa: E402
+	import matplotlib.pyplot  # type: ignore[import]  # noqa: E402
 except ImportError:  # pragma: no cover
 	matplotlib.rcParams["backend"] = current_backend
 

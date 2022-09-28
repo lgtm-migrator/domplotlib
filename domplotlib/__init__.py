@@ -84,10 +84,10 @@ from domdf_python_tools.iterative import chunks
 from domdf_python_tools.pagesizes import PageSize
 from domdf_python_tools.paths import PathPlus, clean_writer
 from domdf_python_tools.typing import PathLike
-from matplotlib.artist import Artist  # type: ignore
-from matplotlib.axes import Axes  # type: ignore
-from matplotlib.figure import Figure  # type: ignore
-from matplotlib.legend import Legend  # type: ignore
+from matplotlib.artist import Artist  # type: ignore[import]
+from matplotlib.axes import Axes  # type: ignore[import]
+from matplotlib.figure import Figure  # type: ignore[import]
+from matplotlib.legend import Legend  # type: ignore[import]
 from typing_extensions import Literal
 
 __all__ = ["create_figure", "horizontal_legend", "save_svg", "transpose"]
@@ -105,7 +105,7 @@ def save_svg(
 		figure: Figure,
 		fname: Union[PathLike, IO],
 		*,
-		dpi: Union[float, Literal["figure"]] = None,
+		dpi: Union[float, Literal["figure"], None] = None,
 		facecolor: Union[str, Literal["auto"]] = 'w',
 		edgecolor: Union[str, Literal["auto"]] = 'w',
 		orientation: Literal["portrait", "landscape"] = "portrait",
@@ -229,7 +229,7 @@ def create_figure(
 	"""  # noqa: D400
 
 	# 3rd party
-	from matplotlib import pyplot  # type: ignore
+	from matplotlib import pyplot  # type: ignore[import]
 
 	# Import here to avoid clobbering theme and backend choices.
 

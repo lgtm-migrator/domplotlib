@@ -3,8 +3,9 @@ from typing import Callable, Tuple
 
 # 3rd party
 import pytest
-from matplotlib.axes import Axes  # type: ignore
-from matplotlib.figure import Figure  # type: ignore
+from domdf_python_tools.paths import PathPlus
+from matplotlib.axes import Axes  # type: ignore[import]
+from matplotlib.figure import Figure  # type: ignore[import]
 
 # this package
 from domplotlib import horizontal_legend, save_svg
@@ -18,7 +19,7 @@ from tests.plots import h_bar_chart, hatch_filled_histograms, koch_snowflake, ma
 		h_bar_chart,
 		markevery,
 		])
-def test_save_svg(tmp_pathplus, plot: Callable[[], Tuple[Figure, ...]]):
+def test_save_svg(tmp_pathplus: PathPlus, plot: Callable[[], Tuple[Figure, ...]]):
 	fig, *_ = plot()
 
 	filename = tmp_pathplus / "plot.svg"
@@ -35,7 +36,7 @@ def test_save_svg(tmp_pathplus, plot: Callable[[], Tuple[Figure, ...]]):
 		h_bar_chart,
 		])
 @check_images
-def test_horizontal_legend(tmp_pathplus, plot: Callable[[], Tuple[Figure, Axes]]):
+def test_horizontal_legend(plot: Callable[[], Tuple[Figure, Axes]]):
 	fig, ax = plot()
 
 	horizontal_legend(fig)
@@ -44,7 +45,7 @@ def test_horizontal_legend(tmp_pathplus, plot: Callable[[], Tuple[Figure, Axes]]
 
 
 @check_images
-def test_horizontal_legend_markevery(tmp_pathplus):
+def test_horizontal_legend_markevery():
 	fig, axs = markevery()
 
 	handles = []

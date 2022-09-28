@@ -5,9 +5,8 @@ from typing import Iterable, Tuple
 # 3rd party
 import pytest
 from cawdrey import Tally
-from matplotlib.figure import Figure  # type: ignore
-from matplotlib.text import Text  # type: ignore
-from pytest_regressions.file_regression import FileRegressionFixture
+from matplotlib.figure import Figure  # type: ignore[import]
+from matplotlib.text import Text  # type: ignore[import]
 
 # this package
 from domplotlib.plots import pie_from_tally
@@ -17,16 +16,11 @@ from tests.common import check_images
 @pytest.mark.parametrize("reverse", [True, False])
 @pytest.mark.parametrize("style", ["default", "domdf"])
 @check_images
-def test_plot_pie_from_tally(
-		tmp_pathplus,
-		file_regression: FileRegressionFixture,
-		reverse: bool,
-		style: str,
-		):
+def test_plot_pie_from_tally(reverse: bool, style: str):
 
 	style_module = importlib.import_module(f"domplotlib.styles.{style}")
 	importlib.reload(style_module)
-	plt = style_module.plt  # type: ignore
+	plt = style_module.plt
 
 	data = [
 			"cat",
@@ -77,16 +71,11 @@ def test_plot_pie_from_tally(
 @pytest.mark.parametrize("reverse", [True, False])
 @pytest.mark.parametrize("style", ["default", "domdf"])
 @check_images
-def test_plot_pie_from_tally_no_explode(
-		tmp_pathplus,
-		file_regression: FileRegressionFixture,
-		reverse: bool,
-		style: str,
-		):
+def test_plot_pie_from_tally_no_explode(reverse: bool, style: str):
 
 	style_module = importlib.import_module(f"domplotlib.styles.{style}")
 	importlib.reload(style_module)
-	plt = style_module.plt  # type: ignore
+	plt = style_module.plt
 
 	data = [
 			"cat",

@@ -33,8 +33,8 @@ from typing import Collection, List, Optional, Tuple, overload
 
 # 3rd party
 from cawdrey.tally import SupportsMostCommon, Tally
-from matplotlib.patches import Wedge  # type: ignore
-from matplotlib.text import Text  # type: ignore
+from matplotlib.patches import Wedge  # type: ignore[import]
+from matplotlib.text import Text  # type: ignore[import]
 
 __all__ = ["pie_from_tally"]
 
@@ -94,7 +94,7 @@ def pie_from_tally(
 	else:  # pragma: no cover
 
 		# 3rd party
-		from matplotlib import pyplot  # type: ignore
+		from matplotlib import pyplot  # type: ignore[import]
 		ax = pyplot.gca()
 
 	kwargs.pop("labels", None)

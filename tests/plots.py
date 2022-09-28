@@ -2,13 +2,14 @@
 import itertools
 from collections import OrderedDict
 from functools import partial
-from typing import List, Tuple
+from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 
 # 3rd party
-import numpy  # type: ignore
-from cycler import cycler  # type: ignore
-from matplotlib.axes import Axes  # type: ignore
-from matplotlib.figure import Figure  # type: ignore
+import numpy
+from cycler import cycler  # type: ignore[import]
+from matplotlib.axes import Axes  # type: ignore[import]
+from matplotlib.collections import PolyCollection  # type: ignore[import]
+from matplotlib.figure import Figure  # type: ignore[import]
 
 # this package
 from domplotlib.styles.default import plt
@@ -19,7 +20,7 @@ def koch_snowflake() -> Tuple[Figure, Axes]:
 	From https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/fill.html#sphx-glr-gallery-lines-bars-and-markers-fill-py
 	"""
 
-	def _koch_snowflake_complex(order):
+	def _koch_snowflake_complex(order: int) -> numpy.ndarray:
 		if order == 0:
 			# initial triangle
 			angles = numpy.array([0, 120, 240]) + 90
@@ -54,72 +55,71 @@ def hatch_filled_histograms() -> Tuple[Figure, Axes]:
 	From https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/filled_step.html#sphx-glr-gallery-lines-bars-and-markers-filled-step-py
 	"""
 
-	def filled_hist(ax, edges, values, bottoms=None, orientation='v', **kwargs):
+	def filled_hist(
+			ax: Axes,
+			edges: Sequence,
+			values: Sequence,
+			bottoms: Union[float, Sequence, None] = None,
+			orientation: str = 'v',
+			**kwargs,
+			) -> PolyCollection:
 		"""
 		Draw a histogram as a stepped patch.
 
 		Extra kwargs are passed through to `fill_between`
 
-		Parameters
-		----------
-		ax : Axes
-			The axes to plot to
+		:param ax: The axes to plot to
 
-		edges : array
-			A length n+1 array giving the left edges of each bin and the
+		:param edges: A length n+1 array giving the left edges of each bin and the
 			right edge of the last bin.
 
-		values : array
-			A length n array of bin counts or values
+		:param values: A length n array of bin counts or values
 
-		bottoms : float or array, optional
-			A length n array of the bottom of the bars.  If None, zero is used.
+		:param bottoms: A length n array of the bottom of the bars.  If None, zero is used.
 
-		orientation : {'v', 'h'}
-		   Orientation of the histogram.  'v' (default) has
-		   the bars increasing in the positive y-direction.
+		:param orientation: Orientation of the histogram.
+			'v' (default) has the bars increasing in the positive y-direction.
+			'h' has the bars increasing in the positive x-direction.
 
-		Returns
-		-------
-		ret : PolyCollection
-			Artist added to the Axes
+		:returns: Artist added to the Axes
 		"""
+
 		print(orientation)
 		if orientation not in "hv":
 			raise ValueError(f"orientation must be in {{'h', 'v'}} not {orientation}")
 
 		kwargs.setdefault("step", "post")
-		edges = numpy.asarray(edges)
-		values = numpy.asarray(values)
-		if len(edges) - 1 != len(values):
+		edges_array = numpy.asarray(edges)
+		values_array = numpy.asarray(values)
+		if len(edges_array) - 1 != len(values_array):
 			raise ValueError(
 					'Must provide one more bin edge than value not: '
-					'len(edges): {lb} len(values): {lv}'.format(lb=len(edges), lv=len(values))
+					'len(edges): {lb} len(values): {lv}'.format(lb=len(edges_array), lv=len(values_array))
 					)
 
 		if bottoms is None:
 			bottoms = 0
-		bottoms = numpy.broadcast_to(bottoms, values.shape)
+		bottoms_array = numpy.broadcast_to(bottoms, values_array.shape)
 
-		values = numpy.append(values, values[-1])
-		bottoms = numpy.append(bottoms, bottoms[-1])
+		values_array = numpy.append(values_array, values_array[-1])
+		bottoms_array = numpy.append(bottoms_array, bottoms_array[-1])
 		if orientation == 'h':
-			return ax.fill_betweenx(edges, values, bottoms, **kwargs)
+			return ax.fill_betweenx(edges_array, values_array, bottoms_array, **kwargs)
 		elif orientation == 'v':
-			return ax.fill_between(edges, values, bottoms, **kwargs)
+			return ax.fill_between(edges_array, values_array, bottoms_array, **kwargs)
 		else:
 			raise AssertionError("you should never be here")
 
-	def stack_hist(
-			ax,
-			stacked_data,
-			sty_cycle,
-			bottoms=None,
-			hist_func=None,
-			labels=None,
-			plot_func=None,
-			plot_kwargs=None
-			):
+	def stack_hist(  # noqa: MAN001
+		ax: Axes,
+		stacked_data,
+		sty_cycle,
+		bottoms=None,
+		hist_func: Optional[Callable] = None,
+		labels: Union[Iterable[str], Iterable[None], None] = None,
+		plot_func: Optional[Callable] = None,
+		plot_kwargs=None
+		) -> Dict[str, PolyCollection]:
 
 		# deal with default binning function
 		if hist_func is None:
@@ -206,17 +206,15 @@ def h_bar_chart() -> Tuple[Figure, Axes]:
 			"Question 6": [8, 19, 5, 30, 38]
 			}
 
-	def survey(results, category_names):
+	def survey(results: Dict[str, List], category_names: Sequence[str]) -> Tuple[Figure, Axes]:
 		"""
-		Parameters
-		----------
-		results : dict
-			A mapping from question labels to a list of answers per category.
+
+		:param results: A mapping from question labels to a list of answers per category.
 			It is assumed all lists contain the same number of entries and that
 			it matches the length of *category_names*.
-		category_names : list of str
-			The category labels.
+		:param category_names: The category labels.
 		"""
+
 		labels = list(results.keys())
 		data = numpy.array(list(results.values()))
 		data_cum = data.cumsum(axis=1)
@@ -261,7 +259,7 @@ def markevery() -> Tuple[Figure, List[Axes]]:
 	x = numpy.linspace(0, 10 - 2 * delta, 200) + delta
 	y = numpy.sin(x) + 1.0 + delta
 
-	def trim_axs(axs, N):
+	def trim_axs(axs: Axes, N: int) -> Axes:
 		"""
 		Reduce *axs* to *N* Axes. All further Axes are removed from the figure.
 		"""
