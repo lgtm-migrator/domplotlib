@@ -5,6 +5,7 @@ domplotlib
 .. start short_desc
 
 .. documentation-summary::
+	:meta:
 
 .. end short_desc
 
@@ -57,7 +58,8 @@ domplotlib
 		:workflow: mypy
 		:alt: mypy status
 
-	.. |requires| requires-io-shield::
+	.. |requires| image:: https://dependency-dash.repo-helper.uk/github/domdfcoding/domplotlib/badge.svg
+		:target: https://dependency-dash.repo-helper.uk/github/domdfcoding/domplotlib/
 		:alt: Requirements Status
 
 	.. |coveralls| coveralls-shield::
@@ -102,7 +104,7 @@ domplotlib
 		:last-commit:
 		:alt: GitHub last commit
 
-	.. |maintained| maintained-shield:: 2021
+	.. |maintained| maintained-shield:: 2022
 		:alt: Maintenance
 
 	.. |pypi-downloads| pypi-shield::
@@ -148,12 +150,18 @@ Contents
 	contributing
 	Source
 
+.. sidebar-links::
+	:caption: Links
+	:github:
+	:pypi: domplotlib
+
+
 .. start links
 
 .. only:: html
 
 	View the :ref:`Function Index <genindex>` or browse the `Source Code <_modules/index.html>`__.
 
-	`Browse the GitHub Repository <https://github.com/domdfcoding/domplotlib>`__
+	:github:repo:`Browse the GitHub Repository <domdfcoding/domplotlib>`
 
 .. end links
