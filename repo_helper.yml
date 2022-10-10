@@ -19,7 +19,8 @@ python_versions:
   - 3.7
   - 3.8
   - 3.9
-  - 3.10-dev
+  - '3.10'
+  - 3.11-dev
 
 keywords:
   - matplotlib
@@ -40,6 +41,3 @@ classifiers:
 
 imgbot_ignore:
  - tests/baseline/*
-
-extra_sphinx_extensions:
- - html_section

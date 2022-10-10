@@ -1,0 +1,14 @@
+{
+  "tests.test_domplotlib.test_horizontal_legend[hatch_filled_histograms]": "725fd151c51d077289d408d3869d28dca3e1297e0f91594581cd9054c57daa14",
+  "tests.test_domplotlib.test_horizontal_legend[h_bar_chart]": "51ac75fbab552c499559454e13f6b4af05e5072ea36211c803d97152631d575b",
+  "tests.test_domplotlib.test_horizontal_legend_markevery": "8e04513303384eb0f487b493f1a3e6ea0fb5d230d691fdf170b62e2d1307b7ad",
+  "tests.test_domplotlib.test_horizontal_legend[koch_snowflake]": "f651cd5f5e69b28b80d7b07c70a95ab051a0a38ae96c14d9e2e1f4e1278d2f81",
+  "tests.test_plots.test_plot_pie_from_tally_no_explode[default-False]": "d50875b2fc36efbf13bbdbe10a9f763af71a6ab7be99570e0f52ef80522e8f56",
+  "tests.test_plots.test_plot_pie_from_tally_no_explode[domdf-True]": "213fd53eba987867188264b322ab33812d9124689cfdeeff6fbd4d2307f18dd7",
+  "tests.test_plots.test_plot_pie_from_tally_no_explode[domdf-False]": "d73607c1ce71eae533ac48d4ba9c2c991d9770f41c0946aa5a8c99eadbf9e845",
+  "tests.test_plots.test_plot_pie_from_tally_no_explode[default-True]": "d4673b371b45816bf11cc1ab71fc73d777d606884f3b81012a658e42d2cd391f",
+  "tests.test_plots.test_plot_pie_from_tally[default-True]": "b0bad9b9e409ee553000cfc92593002b77dc7417de1ad6747527f81f5b3e06e1",
+  "tests.test_plots.test_plot_pie_from_tally[default-False]": "268e34adb14bc672923aeadeddb637058cc529be229df3a39dfefdf07d956b9a",
+  "tests.test_plots.test_plot_pie_from_tally[domdf-False]": "8cb25045e767f6881919c262542a5f448ef08fdcdd033a27f0304a3ed5070caf",
+  "tests.test_plots.test_plot_pie_from_tally[domdf-True]": "32d73f605f4488ca74652a438b682d65a0c08554d566c84862c0f2bfde4d74c3"
+}
