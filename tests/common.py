@@ -1,5 +1,7 @@
-# 3rd party
+# stdlib
 import sys
+
+# 3rd party
 import pytest
 from domdf_python_tools.paths import PathPlus
 
